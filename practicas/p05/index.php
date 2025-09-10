@@ -31,6 +31,40 @@
         echo '</ul>';
     ?>
 
+    <h2>Ejercicio 2</h2>
+
+    <?php
     
+    $a = "ManejadorSQL";
+    $b = 'MySQL';
+    $c = &$a;
+
+    echo "<h4>Mostrando el cotenido de cada variable:</h4>";
+    echo "<ul>";
+    echo "<li>Variable a: $a </li> <br>";
+    echo "<li>Variable b: $b </li> <br>";
+    echo "<li>Variable c: $c </li> <br>";
+
+    echo "</ul>";  
+    $a = "PHP server";
+    $b = &$a;
+
+    echo "<h4>Actualizando y mostrando el cotenido de cada variable:</h4>";
+
+    echo "<ul>";
+    echo "<li>Variable a: $a </li> <br>";
+    echo "<li>Variable b: $b </li> <br>";
+    echo "</ul>";
+    
+    echo "<h4>Explicacion de lo ocurrido en la actualizacion de las variables</h4>";
+
+
+    echo "<p>";
+    echo 'Se les asigno un nuevo valor a las variables, en la variable "a" se le asigno una cadena y en la varible "b" el contenido de la variable "a"';
+    echo "</p>";
+    
+    ?>
+
+
 </body>
 </html>
