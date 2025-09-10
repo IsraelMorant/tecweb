@@ -65,6 +65,33 @@
     
     ?>
 
+    <h2>Ejercicio 3</h2>
+
+    <?php 
+    
+    
+    echo "<ul>";
+    $a = "PHP5";
+    echo "<li>Mostando el contenido de la variable a: $a </li><br>";
+    $z[] = &$a;
+    echo "<li>Mostando el contenido de la variable z: $z[0] </li><br>";
+    $b = "5a version de PHP";
+    echo "<li>Mostando el contenido de la variable b: $b </li><br>";
+    
+    @$c = $b*10;
+    echo "<li>Mostando el contenido de la variable z: $c </li><br>";
+    
+    $a .= $b;
+    echo "<li>Mostando el contenido de la variable z: $a </li><br>";
+    
+    $b *= $c;
+    echo "<li>Mostando el contenido de la variable b: $b </li><br>";
+    
+     $z[0] = "MySQL";
+    echo "<li>Mostando el contenido de la variable z: $z[0] </li><br>";
+    echo "</ul>";
+    
+    ?>
 
 </body>
 </html>
