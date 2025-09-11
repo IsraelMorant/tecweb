@@ -209,5 +209,25 @@
     echo "</ul>";
 
     ?>
+
+    <h2>Ejercicio 7</h2>
+
+    <?php
+    
+
+
+    echo "<ol>";
+    echo "<li><h4>Version de Apache y PHP</h4></li>";
+    echo "<ul><li>".$_SERVER['SERVER_SIGNATURE']."</li></ul>";
+    
+    echo "<li><h4>Nombre del sistema Opereativo (servidor)</h4></li>";
+    echo "<ul><li>".$_SERVER['SERVER_NAME']."</li></ul>";
+    
+    echo "<li><h4>Idioma del Navegador (cliente)</h4></li>";
+    echo "<ul><li>".$_SERVER['HTTP_ACCEPT_LANGUAGE']."</li></ul>";
+    
+    
+    echo "<ol>";
+    ?>
 </body>
 </html>
