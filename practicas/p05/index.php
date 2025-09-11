@@ -79,10 +79,10 @@
     echo "<li>Mostando el contenido de la variable b: $b </li><br>";
     
     @$c = $b*10;
-    echo "<li>Mostando el contenido de la variable z: $c </li><br>";
+    echo "<li>Mostando el contenido de la variable c: $c </li><br>";
     
     $a .= $b;
-    echo "<li>Mostando el contenido de la variable z: $a </li><br>";
+    echo "<li>Mostando el contenido de la variable a: $a </li><br>";
     
     $b *= $c;
     echo "<li>Mostando el contenido de la variable b: $b </li><br>";
@@ -93,5 +93,121 @@
     
     ?>
 
+    <h2>Ejercicio 4</h2>
+
+
+    
+
+    <?php
+
+    echo "<h2>Mostrando el contenido con ayuda de GLOBALS</h2>";
+
+
+    
+     echo "<ul>";
+    $a = "PHP5";
+    echo "<li>Mostando el contenido de la variable a: $GLOBALS[a] </li><br>";
+    $z[] = &$a;
+    $aux = $z[0];
+    echo "<li>Mostando el contenido de la variable z:  $GLOBALS[aux] </li><br>";
+    $b = "5a version de PHP";
+    echo "<li>Mostando el contenido de la variable b:  $GLOBALS[b] </li><br>";
+    
+    @$c = $b*10;
+    echo "<li>Mostando el contenido de la variable c:  $GLOBALS[c] </li><br>";
+    
+    $a .= $b;
+    echo "<li>Mostando el contenido de la variable a:  $GLOBALS[a] </li><br>";
+    
+    $b *= $c;
+    echo "<li>Mostando el contenido de la variable b:  $GLOBALS[b] </li><br>";
+    
+     $z[0] = "MySQL";
+     $aux = $z[0];
+    echo "<li>Mostando el contenido de la variable z:  $GLOBALS[aux] </li><br>";
+    echo "</ul>";
+    
+    
+    
+   
+    
+
+    ?>
+
+    <h2>Ejercicio 5</h2>
+
+    <?php 
+
+    
+    
+    
+    
+
+    echo "<h4>Mostrando las variables:</h4>";
+
+    echo "<ul>";
+    $a = "7 personas";
+    echo "<li>Variable a: $a</li><br>";
+    $b = (integer) $a;
+    echo "<li>Variable b: $b</li><br>";
+    $a = "9E3";
+    echo "<li>Variable a: $a</li><br>";
+    $c = (double) $a;
+    echo "<li>Variable c: $c</li><br>";
+    echo "</ul>";
+    ?>
+
+    <h2>Ejercicio 6</h2>
+
+
+    <?php
+    $a = "0";
+    $b = "TRUE";
+    $c = FALSE;
+    $d = ($a OR $b);
+    $e = ($a AND $c);
+    $f = ($a XOR $b);
+
+    echo "<h4>Comprobando el valor de las variables:</h4>";
+
+    echo "<ul>";
+
+    echo "<li> Variable a: ";
+    var_dump($a);
+    echo "</li><br>";
+
+     echo "<li>Variable b: ";
+    var_dump($b);
+    echo "</li><br>";
+
+     echo "<li> Variable c: ";
+    var_dump($c);
+    echo "</li><br>";
+
+     echo "<li> Variable d: ";
+    var_dump($d);
+    echo "</li><br>";
+
+     echo "<li> Variable e: ";
+    var_dump($e);
+    echo "</li><br>";
+
+     echo "<li> Variable f: ";
+    var_dump($f);
+    echo "</li><br>";
+    echo "</ul>";
+
+
+    echo "<h4>Imprimiendo el valor booleano de c y e:</h4>";
+
+    
+    echo "<ul>";
+    $c=var_export($c,true);//True es para regresar un resultado de la funcion, viene por defautl en false, y arroja directo el resultado en la pantalla en lugar de guardarlo en la variable
+    echo "<li>Variable c: $c</li><br>";
+    $e=var_export($e,true);
+    echo "<li>Variable c: $e</li><br>";
+    echo "</ul>";
+
+    ?>
 </body>
 </html>
