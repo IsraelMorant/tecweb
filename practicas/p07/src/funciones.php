@@ -23,7 +23,7 @@ function tresAleatorios($matriz,$termino,$fila){
 
 if ($termino==true) {
    $total = $fila*3;
-echo  "Numeros obtenidos: ".$total."Numero de iteraciones: ".$fila;
+echo  $total. " Numeros obtenidos en  ".$fila." iteraciones <br>";
 
 return;
 }
@@ -54,6 +54,26 @@ return;
 
 
  
+}
+
+function encontrarNumero(){
+    if(isset($_GET['numero'] ) && isset($_GET['enviarNum'])){
+        $dado=$_GET['numero'];
+        $termina=false;
+        while ($termina==false) {
+            $ale=rand(1,20);
+            $auxRedo=ceil($ale);
+            if (($ale-$auxRedo)==0) {
+                if (($ale % $dado)==0) {
+                    $termina=true;
+                    echo "Numero encontrado: ".$ale."<br>";
+                }
+            }
+        }
+    }
+
+    
+
 }
 
 

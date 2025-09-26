@@ -11,7 +11,7 @@
 
     <div>
         <label for="numero">Numero</label>
-        <input type="number" name="numero" id="numero" value="0">
+        <input type="number" name="numero" id="numero" value="1">
     </div>
 
     <div>
@@ -26,6 +26,9 @@
     multiplo();
 
     tresAleatorios($matriz=[],$termino=false,$fila=0);
+
+
+    encontrarNumero();
     ?>
 
     </h2>
