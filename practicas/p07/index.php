@@ -60,5 +60,37 @@
     
     verificarSE();
     ?>
+
+
+
+
+  <form method="POST">
+
+
+    <div>
+        <label for="matricula">Matricula</label>
+        <input type="text" name="matricula" id="matricula" value="00000">
+    </div>
+
+     <div>
+        <label for="ver">Ver todo el regsitro</label>
+		    <input id="ver" type="checkbox" name="ver"/>
+		    
+    </div>
+
+    <div>
+        <input type="submit" value="Consultar" name="buscar">
+    </div>
+
+    
+
+    </form>
+
+
+  
+    <?php
+    
+    buscarAuto();
+    ?>
 </body>
 </html>
