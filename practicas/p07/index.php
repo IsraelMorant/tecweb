@@ -35,5 +35,30 @@
     ?>
 
     </h2>
+
+     <form method="POST">
+
+
+    <div>
+        <label for="sexo">Sexo</label>
+        <input type="text" name="sexo" id="sexo" value="masculino">
+    </div>
+
+    <div>
+        <label for="edad">Edad</label>
+        <input type="number" name="edad" id="edad" value="1">
+    </div>
+
+    <div>
+        <input type="submit" value="Verificar" name="verificar">
+    </div>
+
+
+    </form>
+
+    <?php
+    
+    verificarSE();
+    ?>
 </body>
 </html>

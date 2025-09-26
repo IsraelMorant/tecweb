@@ -111,4 +111,30 @@ function arregloAscii(){
     echo "</table>";//Fin de la tabla
 }
 
+
+
+function verificarSE(){
+
+
+
+    if (isset($_POST['sexo']) && isset($_POST['edad']) && isset($_POST['verificar'])) {
+       $sexo=$_POST['sexo'];
+       $edad=$_POST['edad'];
+       
+        if ($sexo=="femenino" && $edad >= 18 && $edad <=35) {
+
+            echo "Bienvenida, usted esta en el rango de edad permitido";
+
+        }elseif ($sexo=="masculino" && $edad >= 18 && $edad <=35) {
+
+             echo "Bienvenido, usted esta en el rango de edad permitido";
+        }else {
+            echo "Usted no se encuentra en el rango permitido de edad";
+        }
+                
+
+        
+    }
+}
+
 ?>
