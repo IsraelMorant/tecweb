@@ -1,5 +1,6 @@
 <?php 
 
+//Ejercicio 1
 function multiplo(){
 
 
@@ -18,7 +19,7 @@ echo "El numero es multiplo de 5 y 7 <br>";
 
 }
 
-
+//Ejercicio 2
 function tresAleatorios($matriz,$termino,$fila){
 
 if ($termino==true) {
@@ -38,9 +39,7 @@ return;
   //  $col1= $matriz[$fila][1];
   //  $col2= $matriz[$fila][2];
    // $col3= $matriz[$fila][3];
-  //  $mierda1 = $col1 % 2;
-   // $mierda2 = $col2 % 2;
-  //  $mierda3 = $col3 % 2;
+ 
 
    // echo "Evaluaciones:".($col1 % 2). ($col2 % 2). ($col3 % 2);
     if( ($matriz[$fila][1] % 2) != 0 ) $impar+=1;
@@ -56,6 +55,7 @@ return;
  
 }
 
+//Ejercicio 3
 function encontrarNumero(){
     if(isset($_GET['numero'] ) && isset($_GET['enviarNum'])){
         $dado=$_GET['numero'];
@@ -76,5 +76,39 @@ function encontrarNumero(){
 
 }
 
+//Ejercicio 4
+
+
+function arregloAscii(){
+
+    $arr=[];
+    for ($i=97; $i <=122 ; $i++) { 
+
+        $arr[$i]=chr($i);
+    }
+
+    echo "<h2>Tabla de Valores</h2>";
+        echo "<table>";//Inicio de la tabla
+
+        echo "<tr>";
+
+        echo "<th>Indice</th>";
+        echo "<th>Valor</th>";
+        echo "</tr>";
+    foreach ($arr as $key => $value) {
+        
+
+        
+
+        echo "<tr>";
+        echo "<td>".$key."</td>";
+        echo "<td>".$value."</td>";
+        echo "</tr>";
+
+        
+    }
+
+    echo "</table>";//Fin de la tabla
+}
 
 ?>
