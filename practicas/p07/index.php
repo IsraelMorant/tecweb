@@ -25,6 +25,7 @@
     include("src/funciones.php");
     multiplo();
 
+    tresAleatorios($matriz=[],$termino=false,$fila=0);
     ?>
 
     </h2>
