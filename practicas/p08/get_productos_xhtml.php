@@ -1,31 +1,54 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
 "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es">
-	<?php
+<?php
+  //  header("Content-Type: application/json; charset=utf-8"); 
+    $data = array();
+
 	if(isset($_GET['tope']))
+    {
 		$tope = $_GET['tope'];
+    }
+    else
+    {
+        die('Parámetro "tope" no detectado...');
+    }
 
 	if (!empty($tope))
 	{
 		/** SE CREA EL OBJETO DE CONEXION */
-		@$link = new mysqli('localhost', 'root', '5024', 'marketzone');	
+		@$link = new mysqli('localhost', 'root', '5024', 'marketzone');
+        /** NOTA: con @ se suprime el Warning para gestionar el error por medio de código */
 
 		/** comprobar la conexión */
 		if ($link->connect_errno) 
 		{
 			die('Falló la conexión: '.$link->connect_error.'<br/>');
-			    /** NOTA: con @ se suprime el Warning para gestionar el error por medio de código */
+			//exit();
 		}
 
 		/** Crear una tabla que no devuelve un conjunto de resultados */
 		if ( $result = $link->query("SELECT * FROM productos WHERE unidades <= $tope") ) 
 		{
-			$row = $result->fetch_array(MYSQLI_ASSOC);
+            /** Se extraen las tuplas obtenidas de la consulta */
+			$row = $result->fetch_all(MYSQLI_ASSOC);
+
+            /** Se crea un arreglo con la estructura deseada */
+            foreach($row as $num => $registro) {            // Se recorren tuplas
+                foreach($registro as $key => $value) {      // Se recorren campos
+                    $data[$num][$key] = utf8_encode($value);
+                }
+            }
+
 			/** útil para liberar memoria asociada a un resultado con demasiada información */
 			$result->free();
 		}
 
 		$link->close();
+      //  echo $data;
+        /** Se devuelven los datos en formato JSON */
+        $data2 = json_encode($data, JSON_PRETTY_PRINT);
+       // echo json_encode($data, JSON_PRETTY_PRINT);
 	}
 	?>
 	<head>
@@ -38,8 +61,9 @@
 
 		<br/>
 		
-		<?php while($row){ ?>
-          
+		
+		<?php if( isset($row) ) : ?>
+
 			<table class="table">
 				<thead class="thead-dark">
 					<tr>
@@ -54,26 +78,37 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<th scope="row"><?= $row['id'] ?></th>
-						<td><?= $row['nombre'] ?></td>
-						<td><?= $row['marca'] ?></td>
-						<td><?= $row['modelo'] ?></td>
-						<td><?= $row['precio'] ?></td>
-						<td><?= $row['unidades'] ?></td>
-						
-						<td><?= mb_convert_encoding($row['detalles'],'UTF-8','auto') ?></td>
-						<td><img src=<?= $row['imagen'] ?> ></td>
-					</tr>
+					<?php 
+                        foreach ($row as $row) {
+                            
+                        
+                    ?>
+                    <tr>
+                        <td><?php echo $row['id'] ?></td>
+                        <td><?php echo $row['nombre'] ?></td>
+                        <td><?php echo $row['marca'] ?></td>
+                        <td><?php echo $row['modelo'] ?></td>
+                        <td><?php echo $row['precio'] ?></td>    
+                        <td><?php echo $row['unidades'] ?></td>  
+                        <td><?php echo $row['detalles'] ?></td>  <!-- No es necesaria la funcion de encode para mostrar los caracters especiales !-->
+                       <td><img src=<?= $row['imagen'] ?> ></td>  
+
+
+                            
+                    </tr>
+                    <?php 
+                        }
+                    ?>
 				</tbody>
 			</table>
 
-		<?php }?>
+		<?php elseif(!empty($id)) : ?>
+
 
 			 <script>
                 alert('El ID del producto no existe');
              </script>
 
-		<?php ?>
+		<?php endif; ?>
 	</body>
 </html>
