@@ -84,7 +84,7 @@
                         
                     ?>
                     <tr>
-                        <td><?php echo $row['id'] ?></td>
+                        <td><b><?php echo $row['id'] ?></b></td>
                         <td><?php echo $row['nombre'] ?></td>
                         <td><?php echo $row['marca'] ?></td>
                         <td><?php echo $row['modelo'] ?></td>
