@@ -240,3 +240,110 @@ for(f=1; f<=10; f++)
 document.write(f+" ");
 }
 }
+
+
+
+function funcion14(){
+
+
+    document.write('Cuidado<br>');
+document.write('Ingresa tu documento correctamente<br>');
+document.write('Cuidado<br>');
+document.write('Ingresa tu documento correctamente<br>');
+document.write('Cuidado<br>');
+document.write('Ingresa tu documento correctamente<br>');
+}
+
+
+function mostrarMensaje() {
+document.write('Cuidado<br>');
+document.write('Ingresa tu documento correctamente<br>');
+}
+
+
+function funcion15(){
+mostrarMensaje();
+mostrarMensaje();
+mostrarMensaje();
+}
+
+function mostrarRango(x1,x2) {
+var inicio;
+for(inicio=x1; inicio<=x2; inicio++) {
+document.write(inicio+' ');
+
+}
+}
+
+function funcion16(){
+
+    var valor1,valor2;
+valor1 = prompt('Ingresa el valor inferior:', '');
+valor1 = parseInt(valor1);
+valor2 = prompt('Ingresa el valor superior:', '');
+valor2 = parseInt(valor2);
+mostrarRango(valor1,valor2);
+}
+
+
+
+
+
+function convertirCastellano(x) {
+
+if(x==1)
+return 'uno';
+else
+if(x==2)
+
+return 'dos';
+else
+if(x==3)
+return 'tres';
+else
+if(x==4)
+
+return 'cuatro';
+
+else
+
+if(x==5)
+return 'cinco';
+else
+return 'valor incorrecto';
+
+}
+
+
+
+
+function funcion17(){
+var valor = prompt('Ingresa un valor entre 1 y 5', '');
+valor = parseInt(valor);
+var r = convertirCastellano(valor);
+document.write(r);
+
+}
+
+
+
+function convertirCastellanoS(x) {
+switch (x) {
+case 1: return "uno";
+case 2: return "dos";
+case 3: return "tres";
+case 4: return "cuatro";
+case 5: return "cinco";
+default: return "valor incorrecto";
+}
+}
+
+
+function funcion18(){
+var valor = prompt('Ingresa un valor entre 1 y 5', '');
+valor = parseInt(valor);
+var r = convertirCastellanoS(valor);
+document.write(r);
+
+}
+
