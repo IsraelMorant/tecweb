@@ -86,4 +86,10 @@ if(realP==""|| realP<0)window.alert('Ingrese un cantidad en el campo de unidades
 var imagen = document.getElementById('form-imagen').value;
 
 if(imagen=='')document.getElementById('form-imagen').value='img/cat.png';
+
+
 }
+
+
+
+//Redirgeindo ala pagina de formulario para relaizar la

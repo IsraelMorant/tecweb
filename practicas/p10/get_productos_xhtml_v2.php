@@ -17,7 +17,7 @@
 	if (!empty($tope))
 	{
 		/** SE CREA EL OBJETO DE CONEXION */
-		@$link = new mysqli('localhost', 'root', '5024', 'marketzone');
+		@$link = new mysqli('localhost', 'root', '', 'marketzone');
         /** NOTA: con @ se suprime el Warning para gestionar el error por medio de código */
 
 		/** comprobar la conexión */
@@ -75,6 +75,7 @@
 					<th scope="col">Unidades</th>
 					<th scope="col">Detalles</th>
 					<th scope="col">Imagen</th>
+					<th scope="col">Actualizar</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -92,7 +93,9 @@
                         <td><?php echo $row['unidades'] ?></td>  
                         <td><?php echo $row['detalles'] ?></td>  <!-- No es necesaria la funcion de encode para mostrar los caracters especiales !-->
                        <td><img src=<?= $row['imagen'] ?> ></td>  
-
+						<td><b><input type="button" 
+                               value="Actualizar" 
+                               onclick="send2form('<?php echo $row['nombre'] ?>','<?php echo $row['marca'] ?>','<?php echo $row['modelo'] ?>','<?php echo $row['precio'] ?>','<?php echo $row['unidades'] ?>','<?php echo $row['detalles'] ?>','<?php echo $row['imagen'] ?>')"/></b></td>
 
                             
                     </tr>
@@ -111,4 +114,64 @@
 
 		<?php endif; ?>
 	</body>
+
+	<script src="http://localhost:8080/tecweb/practicas/p10/scripts/formulario.js" ></script>
+
+
+	 <script>
+            function send2form(name,marca,modelo,precio,unidades,detalles,imagen) {
+                var form = document.createElement("form");
+
+                var nombreIn = document.createElement("input");
+                nombreIn.type = 'text';
+                nombreIn.name = 'name';
+                nombreIn.value = name;
+                form.appendChild(nombreIn);
+
+                var edadIn = document.createElement("input");
+                edadIn.type = 'text';
+                edadIn.name = 'marca';
+                edadIn.value = marca;
+                form.appendChild(edadIn);
+
+				var modeloIn = document.createElement("input");
+                modeloIn.type = 'text';
+                modeloIn.name = 'modelo';
+                modeloIn.value = modelo;
+                form.appendChild(modeloIn);
+
+				var precioIn = document.createElement("input");
+                precioIn.type = 'text';
+                precioIn.name = 'precio';
+                precioIn.value = precio;
+                form.appendChild(precioIn);
+
+				var detallesIn = document.createElement("input");
+                detallesIn.type = 'text';
+                detallesIn.name = 'detalles';
+                detallesIn.value = detalles;
+                form.appendChild(detallesIn);
+
+				var unidadesIn = document.createElement("input");
+                unidadesIn.type = 'text';
+                unidadesIn.name = 'unidades';
+                unidadesIn.value = unidades;
+                form.appendChild(unidadesIn);
+
+				var imagenIn = document.createElement("input");
+                imagenIn.type = 'text';
+                imagenIn.name = 'imagen';
+                imagenIn.value = imagen;
+                form.appendChild(imagenIn);
+
+                console.log(form);
+
+                form.method = 'POST';
+                form.action = 'http://localhost:8080/tecweb/practicas/p10/formulario_productos_v2.php';  
+
+                document.body.appendChild(form);
+                form.submit();
+            }
+        </script>
+
 </html>
