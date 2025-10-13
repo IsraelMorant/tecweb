@@ -15,26 +15,74 @@
         <input type="number" name="numero" id="numero" value="1">
     </div>
 
+
+    
     <div>
         <input type="submit" value="Es multiplo?" name="enviarNum">
     </div>
 
 
     </form>
+
+
+
+
+
     <h2>
     <?php
     include("src/funciones.php");
     multiplo();
-
+   // encontrarNumero();
     tresAleatorios($matriz=[],$termino=false,$fila=0);
 
 
-    encontrarNumero();
+   
 
-    arregloAscii();
+    
     ?>
 
     </h2>
+
+
+
+
+
+    <form method="GET">
+
+
+    <div>
+        <label for="numeroD">Numero</label>
+        <input type="number" name="numeroD" id="numeroD" value="1">
+    </div>
+
+
+    
+    <div>
+        <input type="submit" value="Encontrar Numero" name="encotrarNum">
+    </div>
+
+
+    </form>
+
+
+
+
+
+     <h2>
+    <?php
+   
+   
+    encontrarNumero();
+    arregloAscii();
+
+    ?>
+
+    </h2>
+
+
+
+
+    
 
      <form method="POST">
 

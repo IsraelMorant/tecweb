@@ -57,11 +57,11 @@ return;
 
 //Ejercicio 3
 function encontrarNumero(){
-    if(isset($_GET['numero'] ) && isset($_GET['enviarNum'])){
-        $dado=$_GET['numero'];
+    if(isset($_GET['numeroD'] ) && isset($_GET['encotrarNum'])){
+        $dado=$_GET['numeroD'];
         $termina=false;
         while ($termina==false) {
-            $ale=rand(1,20);
+            $ale=rand(1,100);
             $auxRedo=ceil($ale);
             if (($ale-$auxRedo)==0) {
                 if (($ale % $dado)==0) {
