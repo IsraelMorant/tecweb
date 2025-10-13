@@ -104,7 +104,7 @@
                         <td class="row-data"><img src=<?= $row['imagen'] ?> ></td>  
 					   <td><b><input type="button" 
                                value="Actualizar" 
-                               onclick="send2form('<?php echo $row['nombre'] ?>','<?php echo $row['marca'] ?>','<?php echo $row['modelo'] ?>','<?php echo $row['precio'] ?>','<?php echo $row['unidades'] ?>','<?php echo $row['detalles'] ?>','<?php echo $row['imagen'] ?>')"/></b></td>
+                               onclick="send2form('<?php echo $row['nombre'] ?>','<?php echo $row['marca'] ?>','<?php echo $row['modelo'] ?>','<?php echo $row['precio'] ?>','<?php echo $row['unidades'] ?>','<?php echo $row['detalles'] ?>','<?php echo $row['imagen'] ?>','<?php echo $row['id'] ?>')"/></b></td>
 
                             
                     </tr>
@@ -127,7 +127,7 @@
 
 
 	 <script>
-            function send2form(name,marca,modelo,precio,unidades,detalles,imagen) {
+            function send2form(name,marca,modelo,precio,unidades,detalles,imagen,id) {
                 var form = document.createElement("form");
 
                 var nombreIn = document.createElement("input");
@@ -172,10 +172,18 @@
                 imagenIn.value = imagen;
                 form.appendChild(imagenIn);
 
+
+
+				var idIn = document.createElement("input");
+                idIn.type = 'text';
+                idIn.name = 'id';
+                idIn.value = id;
+                form.appendChild(idIn);
+
                 console.log(form);
 
                 form.method = 'POST';
-                form.action = 'http://localhost:8080/tecweb/practicas/p10/formulario_productos_v2.php';  
+                form.action = 'http://localhost:8080/tecweb/practicas/p10/formulario_productos_v3.php';  
 
                 document.body.appendChild(form);
                 form.submit();
