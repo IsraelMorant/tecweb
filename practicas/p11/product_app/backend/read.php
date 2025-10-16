@@ -5,15 +5,27 @@
  // SE CREA EL ARREGLO QUE SE VA A DEVOLVER EN FORMA DE JSON
     //$data = array();
     // SE VERIFICA HABER RECIBIDO EL ID
+
+    //Consulta para buscar por coincidencia en  nombre, marca o detalles respecto a ala cadena ingresada por el usuario
     if( isset($_POST['name']) ) {
         $data = array();
         $name = $_POST['name'];
         // SE REALIZA LA QUERY DE BÚSQUEDA Y AL MISMO TIEMPO SE VALIDA SI HUBO RESULTADOS
-        if ( $result = $conexion->query("SELECT * FROM `productos` WHERE `nombre` LIKE '%{$name}%'") ) {
+        if ( $result = $conexion->query("SELECT * FROM `productos` WHERE `nombre` LIKE '%{$name}%'  OR  `marca` LIKE '%{$name}%' OR `detalles` LIKE '%{$name}%'"  ) ) {
             // SE OBTIENEN LOS RESULTADOS
-			$row = $result->fetch_array(MYSQLI_ASSOC);
-            
+			$row = $result->fetch_all(MYSQLI_ASSOC);
+
+
+
+            //echo $row;
             if(!is_null($row)) {
+
+                 foreach($row as $num => $registro) {            // Se recorren tuplas
+                foreach($registro as $key => $value) {      // Se recorren campos
+                    $data[$num][$key] = utf8_encode($value);
+                }
+            }
+                /*
                 // SE CODIFICAN A UTF-8 LOS DATOS Y SE MAPEAN AL ARREGLO DE RESPUESTA
                 foreach($row as $key => $value) {
                  
@@ -21,6 +33,7 @@
 
                    // echo utf8_encode($data[$key]);
                 }
+                */   
             }
 			$result->free();
 		} else {

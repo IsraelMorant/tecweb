@@ -11,6 +11,8 @@
          * LA INSERCIÓN A LA BASE DE DATOS. COMO RESPUESTA REGRESA
          * UN MENSAJE DE ÉXITO O DE ERROR, SEGÚN SEA EL CASO.
          */
-        echo '[SERVIDOR] Nombre: '.$jsonOBJ->nombre;
+
+        //Validando que no exista otro producto con el mismo nombre
+       // echo '[SERVIDOR] Nombre: '.$jsonOBJ->nombre;//Comprobnado que los datos lleguen correctamentes
     }
 ?>
