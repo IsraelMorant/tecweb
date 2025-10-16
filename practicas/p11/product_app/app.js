@@ -243,7 +243,19 @@ if(valido){//Si los datos son validos que se inserten a la base de datos
         // SE VERIFICA SI LA RESPUESTA ESTÁ LISTA Y FUE SATISFACTORIA
         if (client.readyState == 4 && client.status == 200) {
             console.log(client.responseText);
+            //Evaluando la respuesta
+            
 
+            if(client.responseText==44444){//En caso de que esxita ya un producto con ese nombre
+                window.alert("El prodcuto ya esxite");
+            }
+            if(client.responseText==1){//Devulvce un boolean la consulta segun si se hizo o no la consulta
+                window.alert("El prodcuto se ha agregado correctamente");
+            }
+            if(client.responseText==2)window.alert("Error al agrefar el producto");
+                
+            
+            
         }
     };
     client.send(productoJsonString);
@@ -315,14 +327,14 @@ if ( !patron.test(modelo) )
 var paNum=/[0-9.]/;
 if(!paNum.test(precio)){
 
-window.alert('Solo puede ingresar numeros en el apartado de precio')
+window.alert('Solo puede ingresar numeros en el apartado de precio');
 return false;
 }else{
 //Pasndo a entero la entrada validada como numero
 var realP=parseInt(precio);
 
 if(realP==""|| realP<=99.99){
-    window.alert('Ingrese un precio mayor a 99.99')
+    window.alert('Ingrese un precio mayor a 99.99');
     return false;
 }
 
