@@ -3,10 +3,12 @@
 
     // SE OBTIENE LA INFORMACIÓN DEL PRODUCTO ENVIADA POR EL CLIENTE
     $producto = file_get_contents('php://input');
+    //$producto = $_POST['name'];
     $data = array(
         'status'  => 'error',
         'message' => 'Ya existe un producto con ese nombre'
     );
+    echo $producto;
     if(!empty($producto)) {
         // SE TRANSFORMA EL STRING DEL JASON A OBJETO
         $jsonOBJ = json_decode($producto);

@@ -1,3 +1,6 @@
+
+
+
 // JSON BASE A MOSTRAR EN FORMULARIO
 var baseJSON = {
     "precio": 0.0,
@@ -17,31 +20,107 @@ function init() {
     document.getElementById("description").value = JsonString;
 
     // SE LISTAN TODOS LOS PRODUCTOS
-    listarProductos();
+   // listarProductos();
 }
 
 
 //JQuery:
 
+$(document).ready(function(){//Cuando la pagina se haya termindao de cargar 
 
-$(document).ready(function(){//Cuando el documeto se cargue completamente entonces 
+console.log("JQuery Funcionando");
 
-$.ajax({//Para cargar dinamicamente los datos de la base de datos
-    url: './backend/product-list.php',
-    type: 'GET',
+$('#product-result').hide();
 
-    succes: function(response){
-       let products= JSON.parse(response);
-       let template = '';
 
-       products.forEach(product => {
-        
-       });
+$('#search').keyup(function(e){
+    if($('#search').val()){
+   let search = $('#search').val();
+
+   console.log(search);
+
+  $.ajax({//Buscador dinamico con cada letra que se agrega
+    url: './backend/product-search.php',
+    type:'POST',
+    data: { search },
+    success: function(response){
+      let products =  JSON.parse(response);
+      //console.log(products);
+      let template = '';
+
+      products.forEach(product =>{
+
+        template += `<li>
+            ${product.nombre}
+        </li>`
+
+      });
+
+      $('#container').html(template);
+      $('#product-result').show();
+        }
+
+     });
+
+
     }
-
-
 });
 
+
+
+
+$('#product-form').submit(function(e){
+   // console.log("Enviando nuevo ");
+    
+
+
+    const postData = {
+
+        nombre: $('#name').val(),
+        detalles: $('#description').val(),
+    };
+
+    $.post('./backend/product-add.php', postData, function(response) {
+        console.log(response);
+
+    });
+   console.log(postData);
+    e.preventDefault();
+});
+
+
+
+
+
+
+
+
+
+$.ajax({//Para mostrar la informacion dinamciacmente ciuando
+
+        url:'./backend/product-list.php',
+        type: 'GET',
+        success: function(response){
+            let products = JSON.parse(response);
+
+            let template = '';
+            products.forEach(product => {
+            
+                template += `
+                    <tr>
+                        <td>${product.id}</td>
+                        <td>${product.nombre}</td>
+                        <td>${product.detalles}</td>
+                    </tr>
+                `
+
+            });
+
+            $('#products').html(template);
+        
+        }
+
+    })
 
 
 });
