@@ -9,7 +9,7 @@
         'status'  => 'error',
         'message' => 'Ya existe un producto con ese nombre'
     );
-    echo $producto;
+    //echo $producto;
     if(!empty($producto)) {
         // SE TRANSFORMA EL STRING DEL JASON A OBJETO
         $jsonOBJ = json_decode($detalles);
@@ -24,6 +24,7 @@
                 $data['status'] =  "success";
                 $data['message'] =  "Producto agregado";
             } else {
+                 $data['status'] =  "faild";
                 $data['message'] = "ERROR: No se ejecuto $sql. " . mysqli_error($conexion);
             }
         }

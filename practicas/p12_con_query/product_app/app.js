@@ -28,6 +28,13 @@ function init() {
 
 $(document).ready(function(){//Cuando la pagina se haya termindao de cargar 
 
+
+
+
+
+    let editar = false;
+
+
 console.log("JQuery Funcionando");
 
 $('#product-result').hide();
@@ -81,14 +88,32 @@ $('#product-form').submit(function(e){
 
         nombre: $('#name').val(),
         detalles: $('#description').val(),
+        id: $('#productId').val()
     };
+    
+    let url =  editar === false ? './backend/product-add.php' : './backend/product-edit.php'
 
-    $.post('./backend/product-add.php', postData, function(response) {
+    $.post(url, postData, function(response) {
+       const st = JSON.parse(response);
+        let status = "Estatus: "+st.status+" <br>Mensaje: "+st.message;
         console.log(response);
+         $('#container').html(status);
+      $('#product-result').show();
         fetchProducts();
+         baseJSON = {
+    "precio": 0.0,
+    "unidades": 1,
+    "modelo": "XX-000",
+    "marca": "NA",
+    "detalles": "NA",
+    "imagen": "img/default.png"
+  };
+
         $('#product-form').trigger('reset');
+        $('#description').val(JSON.stringify(baseJSON,null,2))
     });
    //console.log(postData);
+   editar=false;
     e.preventDefault();
 });
 
@@ -153,7 +178,11 @@ let id = $(element).attr('productId');
 
 $.post('./backend/product-delete.php', {id}, function(response) {
 
-
+     const st = JSON.parse(response);
+        let status = "Estatus: "+st.status+" <br>Mensaje: "+st.message;
+        
+         $('#container').html(status);
+      $('#product-result').show();
     console.log(response);
     fetchProducts();
 
@@ -188,17 +217,19 @@ $(document).on('click',".product-item", function(){
         //Modificando la base JSON segun el producto
 
         baseJSON = {
-    "precio": 0.0,
-    "unidades": 1,
-    "modelo": "XX-000",
-    "marca": "NA",
-    "detalles": "NA",
-    "imagen": "img/default.png"
-  };
-        const productStr = JSON.stringify(product[0]);
+                "precio":product[0].precio,
+                "unidades": product[0].unidades,
+                "modelo": `${product[0].modelo}` ,
+                "marca": `${product[0].marca}`,
+                "detalles":  `${product[0].detalles}`,
+                "imagen": `${product[0].imagen}`
+        };
+        //const productStr = JSON.stringify(product[0]);
         //console.log(product) ;
         $('#name').val(product[0].nombre);
-        $('#description').val(productStr);
+        $('#description').val(JSON.stringify(baseJSON,null,2));
+        $('#productId').val(product[0].id);
+        editar = true;
     })
 
 });
