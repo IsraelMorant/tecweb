@@ -33,6 +33,9 @@ console.log("JQuery Funcionando");
 $('#product-result').hide();
 
 
+
+fetchProducts();
+
 $('#search').keyup(function(e){
     if($('#search').val()){
    let search = $('#search').val();
@@ -82,9 +85,10 @@ $('#product-form').submit(function(e){
 
     $.post('./backend/product-add.php', postData, function(response) {
         console.log(response);
-
+        fetchProducts();
+        $('#product-form').trigger('reset');
     });
-   console.log(postData);
+   //console.log(postData);
     e.preventDefault();
 });
 
@@ -95,7 +99,9 @@ $('#product-form').submit(function(e){
 
 
 
+function fetchProducts(){
 
+    
 $.ajax({//Para mostrar la informacion dinamciacmente ciuando
 
         url:'./backend/product-list.php',
@@ -107,10 +113,17 @@ $.ajax({//Para mostrar la informacion dinamciacmente ciuando
             products.forEach(product => {
             
                 template += `
-                    <tr>
-                        <td>${product.id}</td>
-                        <td>${product.nombre}</td>
+                    <tr productId="${product.id}">
+                        <td >${product.id}</td>
+                        <td>
+                            <a href="#" class="product-item">${product.nombre}</a>
+                        </td>
                         <td>${product.detalles}</td>
+                        <td>
+                            <button class="product-eliminar btn btn-danger">
+                            Eliminar
+                            </button>
+                        </td>
                     </tr>
                 `
 
@@ -122,5 +135,72 @@ $.ajax({//Para mostrar la informacion dinamciacmente ciuando
 
     })
 
+}
+
+$(document).on('click','.product-eliminar',function(){//PAra elimianr un producto conun boton de cada producto
+
+
+        if(confirm('¿Seguro que quires elminar el prodcuto?')){
+
+            //console.log("Eliminar")//Comprobando que el boton si tenga el envento ligada
+//console.log(this);
+
+
+let element = $(this)[0].parentElement.parentElement;
+
+let id = $(element).attr('productId');
+//console.log(id);
+
+$.post('./backend/product-delete.php', {id}, function(response) {
+
+
+    console.log(response);
+    fetchProducts();
+
+})
+
+        }
+});
+
+
+
+
+
+
+$(document).on('click',".product-item", function(){
+
+    //console.log("Modificando");
+
+    let element = $(this)[0].parentElement.parentElement;
+
+    let id = $(element).attr('productId');
+
+  //  console.log(id);
+
+    $.post('./backend/product-single.php', {id}, function(response){
+        
+
+
+        console.log(response);
+
+        const product = JSON.parse(response);
+        
+        //Modificando la base JSON segun el producto
+
+        baseJSON = {
+    "precio": 0.0,
+    "unidades": 1,
+    "modelo": "XX-000",
+    "marca": "NA",
+    "detalles": "NA",
+    "imagen": "img/default.png"
+  };
+        const productStr = JSON.stringify(product[0]);
+        //console.log(product) ;
+        $('#name').val(product[0].nombre);
+        $('#description').val(productStr);
+    })
+
+});
 
 });
