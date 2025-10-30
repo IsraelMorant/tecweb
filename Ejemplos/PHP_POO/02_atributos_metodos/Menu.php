@@ -20,7 +20,7 @@
 
     public function mostrar(){
 
-        for($i=0; $i<-count($this->enlaces); $i++){
+        for($i=0; $i<count($this->enlaces); $i++){
 
             echo '<a href="'.$this->enlaces[$i].'">'.$this->titulos[$i].'</a>';
 

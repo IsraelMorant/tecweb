@@ -34,7 +34,7 @@ class Cuerpo{
 
 
     public function insertar_grafico($line){
-        $this->lineas=$line;
+        $this->lineas[]=$line;
     }
 
 
@@ -69,7 +69,7 @@ class Pie{
 
         $estilo = 'text-align: center';
 
-        echo '<h1 style="'.$estilo.'">'.$this->mensaje.'</h1>';
+        echo '<h4 style="'.$estilo.'">'.$this->mensaje.'</h4>';
 
     }
 
@@ -103,6 +103,25 @@ public function __construct($texto1,$texto2){
     $this->cuerpo=new Cuerpo;
 
     $this->pie=new Pie($texto2);
+}
+
+
+public function insertar_cuerpo($texto){
+
+    $this->cuerpo->insertar_grafico($texto);
+
+
+
+}
+
+
+public function graficar(){
+
+
+    $this->cabecera->graficar();
+    $this->cuerpo->graficar();
+    $this->pie->graficar();
+
 }
     
 }
