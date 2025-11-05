@@ -16,9 +16,7 @@ function init() {
      * Convierte el JSON a string para poder mostrarlo
      * ver: https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/JSON
      */
-    var JsonString = JSON.stringify(baseJSON,null,2);
-    document.getElementById("description").value = JsonString;
-
+   
     // SE LISTAN TODOS LOS PRODUCTOS
    // listarProductos();
 }
@@ -87,7 +85,12 @@ $('#product-form').submit(function(e){
     const postData = {
 
         nombre: $('#name').val(),
-        detalles: $('#description').val(),
+        precio: $('#precio').val(),
+        unidades: $('#unidades').val(),
+        modelo: $('#modelo').val(),
+        marca: $('#marca').val(),
+        detalles: $('#detalles').val(),
+        imagen: $('#imagen').val(),
         id: $('#productId').val()
     };
     
@@ -100,17 +103,10 @@ $('#product-form').submit(function(e){
          $('#container').html(status);
       $('#product-result').show();
         fetchProducts();
-         baseJSON = {
-    "precio": 0.0,
-    "unidades": 1,
-    "modelo": "XX-000",
-    "marca": "NA",
-    "detalles": "NA",
-    "imagen": "img/default.png"
-  };
+        
 
         $('#product-form').trigger('reset');
-        $('#description').val(JSON.stringify(baseJSON,null,2))
+       
     });
    //console.log(postData);
    editar=false;
