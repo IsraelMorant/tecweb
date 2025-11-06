@@ -2,10 +2,19 @@
     include_once __DIR__.'/database.php';
 
     // SE OBTIENE LA INFORMACIÓN DEL PRODUCTO ENVIADA POR EL CLIENTE
-    $producto = $_POST['nombre'];
-    $detalles = $_POST['detalles'];
+   // $producto = $_POST['nombre'];
+    //$detalles = $_POST['detalles'];
     $id = $_POST['id'];
-    
+    //
+
+
+    $nombre = $_POST['nombre'];
+    $precio = $_POST['precio'];
+    $unidades = $_POST['unidades'];
+    $modelo = $_POST['modelo'];
+    $marca = $_POST['marca'];
+    $detalles= $_POST['detalles'];
+    $imagen = $_POST['imagen'];
 
 
      $data = array(
@@ -19,12 +28,12 @@
      if (mysqli_num_rows($result) > 0  ) {
       
            
-    if(!empty($producto)) {
+    if(!empty($nombre)) {
         // SE TRANSFORMA EL STRING DEL JASON A OBJETO
-        $jsonOBJ = json_decode($detalles);
+      //  $jsonOBJ = json_decode($detalles);
       
             $conexion->set_charset("utf8");
-            $sql = "UPDATE productos SET nombre = '{$producto}', marca = '{$jsonOBJ->marca}', modelo = '{$jsonOBJ->modelo}', precio = {$jsonOBJ->precio}, detalles = '{$jsonOBJ->detalles}', unidades =  '{$jsonOBJ->unidades}', imagen=  '{$jsonOBJ->imagen}' WHERE id = '{$id}'";
+            $sql = "UPDATE productos SET nombre = '{$nombre}', marca = '{$marca}', modelo = '{$modelo}', precio = {$precio}, detalles = '{$detalles}', unidades =  '{$unidades}', imagen=  '{$imagen}' WHERE id = '{$id}'";
             if($conexion->query($sql)){
                 $data['status'] =  "Exito";
                 $data['message'] =  "Producto actualizado";
