@@ -1,0 +1,10 @@
+{
+    "autoload": {
+        "classmap": [
+            "myapi/Create",
+            "myapi/Delete",
+            "myapi/Read",
+            "myapi/Update"
+        ]
+    }
+}
