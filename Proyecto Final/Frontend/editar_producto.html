@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Producto</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .msg {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Editar Producto</h2>
+
+    <label>ID del Producto (obligatorio)</label>
+    <input type="number" id="id" placeholder="ID del producto">
+
+    <label>Nuevo nombre</label>
+    <input type="text" id="nombre" placeholder="Nombre del producto">
+
+    <label>Nuevo precio</label>
+    <input type="number" id="precio" placeholder="Precio">
+
+    <label>Nueva descripción</label>
+    <textarea id="descripcion" placeholder="Descripción"></textarea>
+
+    <button id="editarBtn">Actualizar Producto</button>
+
+    <div id="respuesta" class="msg"></div>
+</div>
+
+<script>
+    $('#editarBtn').on('click', function () {
+        const id = $('#id').val();
+        const nombre = $('#nombre').val();
+        const precio = $('#precio').val();
+        const descripcion = $('#descripcion').val();
+
+        if (!id || !nombre) {
+            $('#respuesta').removeClass().addClass('msg error').text('ID y nombre son obligatorios.');
+            return;
+        }
+
+        const data = {
+            id: id,
+            nombre: nombre,
+            precio: precio,
+            descripcion: descripcion
+        };
+
+        $.ajax({
+            url: 'http://localhost/product_app/backend/myapi/index.php?method=update_product',
+            method: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            success: function (res) {
+                const r = JSON.parse(res);
+                const $msg = $('#respuesta');
+                if (r.status === 'success') {
+                    $msg.removeClass().addClass('msg success').text(r.message);
+                } else {
+                    $msg.removeClass().addClass('msg error').text(r.message);
+                }
+            },
+            error: function () {
+                $('#respuesta').removeClass().addClass('msg error').text('Error al conectar con el servidor.');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

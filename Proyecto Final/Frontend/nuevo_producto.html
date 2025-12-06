@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Producto</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f6f6f6;
+            padding: 30px;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 8px rgba(0,0,0,0.1);
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .msg {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Nuevo Producto</h2>
+    <input type="text" id="nombre" placeholder="Nombre del producto">
+    <input type="number" id="precio" placeholder="Precio">
+    <textarea id="descripcion" placeholder="Descripción"></textarea>
+    <button id="agregarBtn">Guardar Producto</button>
+    <div id="respuesta" class="msg"></div>
+</div>
+
+<script>
+    $('#agregarBtn').on('click', function () {
+        const data = {
+            nombre: $('#nombre').val(),
+            precio: $('#precio').val(),
+            descripcion: $('#descripcion').val()
+        };
+
+        $.ajax({
+            url: 'http://localhost/product_app/backend/myapi/index.php?method=add_product',
+            method: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            success: function (response) {
+                const res = JSON.parse(response);
+                const $msg = $('#respuesta');
+
+                if (res.status === 'success') {
+                    $msg.removeClass('error').addClass('success').text(res.message);
+                    $('#nombre, #precio, #descripcion').val('');
+                } else {
+                    $msg.removeClass('success').addClass('error').text(res.message);
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Catálogo de Productos (CRUD)</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        button {
+            padding: 6px 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-danger {
+            background-color: red;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Catálogo de Productos</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="catalogo-body">
+            <!-- Productos aquí -->
+        </tbody>
+    </table>
+
+    <h2>Editar Producto</h2>
+    <input type="hidden" id="edit-id">
+    <label>Nombre:</label>
+    <input type="text" id="edit-nombre">
+    <label>Precio:</label>
+    <input type="number" id="edit-precio">
+    <label>Descripción:</label>
+    <textarea id="edit-descripcion"></textarea>
+    <button id="guardarCambios">Guardar Cambios</button>
+
+    <div id="edit-msg"></div>
+</div>
+
+<script>
+    function cargarCatalogo() {
+        $.ajax({
+            url: 'http://localhost/product_app/backend/myapi/index.php?method=get_products',
+            method: 'GET',
+            success: function (response) {
+                const productos = JSON.parse(response);
+                const $body = $('#catalogo-body');
+                $body.empty();
+
+                productos.forEach(producto => {
+                    const row = `
+                        <tr>
+                            <td>${producto.id}</td>
+                            <td>${producto.nombre}</td>
+                            <td>$${producto.precio}</td>
+                            <td>${producto.descripcion}</td>
+                            <td>
+                                <button onclick="cargarProducto(${producto.id}, '${producto.nombre}', ${producto.precio}, \`${producto.descripcion}\`)">Editar</button>
+                                <button class="btn-danger" onclick="eliminarProducto(${producto.id})" style="margin-left:5px;">Eliminar</button>
+                            </td>
+                        </tr>
+                    `;
+                    $body.append(row);
+                });
+            }
+        });
+    }
+
+    function cargarProducto(id, nombre, precio, descripcion) {
+        $('#edit-id').val(id);
+        $('#edit-nombre').val(nombre);
+        $('#edit-precio').val(precio);
+        $('#edit-descripcion').val(descripcion);
+        $('#edit-msg').removeClass().text('');
+    }
+
+    $('#guardarCambios').on('click', function () {
+        const id = $('#edit-id').val();
+        const nombre = $('#edit-nombre').val();
+        const precio = $('#edit-precio').val();
+        const descripcion = $('#edit-descripcion').val();
+
+        if (!id || !nombre) {
+            $('#edit-msg').removeClass().addClass('error').text('ID y nombre son obligatorios.');
+            return;
+        }
+
+        $.ajax({
+            url: 'http://localhost/product_app/backend/myapi/index.php?method=update_product',
+            method: 'POST',
+            data: JSON.stringify({
+                id: id,
+                nombre: nombre,
+                precio: precio,
+                descripcion: descripcion
+            }),
+            contentType: 'application/json',
+            success: function (res) {
+                const r = JSON.parse(res);
+                const msg = $('#edit-msg');
+
+                if (r.status === 'success') {
+                    msg.removeClass().addClass('success').text(r.message);
+                    cargarCatalogo(); // Recargar tabla
+                } else {
+                    msg.removeClass().addClass('error').text(r.message);
+                }
+            }
+        });
+    });
+
+    function eliminarProducto(id) {
+        if (confirm('¿Estás seguro de eliminar este producto?')) {
+            $.ajax({
+                url: 'http://localhost/product_app/backend/myapi/index.php?method=delete_product',
+                method: 'POST',
+                data: JSON.stringify({ id: id }),
+                contentType: 'application/json',
+                success: function (res) {
+                    const r = JSON.parse(res);
+                    alert(r.message);
+                    cargarCatalogo(); // Recargar tabla
+                },
+                error: function () {
+                    alert('Error al eliminar producto.');
+                }
+            });
+        }
+    }
+
+    // Cargar al iniciar
+    $(document).ready(function () {
+        cargarCatalogo();
+    });
+</script>
+
+</body>
+</html>
