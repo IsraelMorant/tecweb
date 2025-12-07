@@ -5,12 +5,14 @@ require_once 'Login.php';
 require_once 'Read.php';
 require_once 'Productos.php';
 require_once 'Dashboard.php';
-
+require_once 'DashboardPanel.php';
+require_once 'singUp.php';
 use TECWEB\MYAPI\Login;
 use TECWEB\MYAPI\Read;
 use TECWEB\MYAPI\Products;
 use TECWEB\MYAPI\Dashboard;
-
+use TECWEB\MYAPI\DashboardP;
+use TECWEB\MYAPI\usuario;
 $method = $_GET['method'] ?? '';
 $json = json_decode(file_get_contents('php://input'));
 
@@ -49,8 +51,16 @@ switch ($method) {
     $api = new Products('localhost', 'root', '', 'mi_base');
     echo $api->delete($json);
     break;
+    
+    case 'dashboardP':
+        $api = new DashboardP('localhost', 'root', '', 'mi_base');
+        echo $api->getStats($json);
+        break;
 
-
+    case 'add_usuario':
+        $api = new usuario('localhost', 'root', '', 'mi_base');
+        echo $api->add($json);
+        break;   
 
     default:
         echo json_encode([

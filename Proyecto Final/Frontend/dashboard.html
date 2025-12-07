@@ -17,11 +17,11 @@
     <div class="cards">
         <div class="card small">
             <h3>Total de Productos</h3>
-            <p id="total-productos">...</p>
+            <p id="total-productos"></p>
         </div>
         <div class="card small">
             <h3>Total de Usuarios</h3>
-            <p id="total-usuarios">...</p>
+            <p id="total-usuarios"></p>
         </div>
     </div>
 
@@ -36,7 +36,7 @@
 <script>
     $(document).ready(function () {
         $.ajax({
-            url: 'http://localhost:8080/tecweb/Proyecto%20Final/Backend/Api/index.php?method=dashboard', //Moidifcando el url para cada computadora donde se ejecute, y ajustando correctamente las referencias
+            url: 'http://localhost:8080/tecweb/Proyecto%20Final/Backend/Api/index.php?method=dashboardP', //Moidifcando el url para cada computadora donde se ejecute, y ajustando correctamente las referencias
             method: 'GET',
             success: function (res) {
                 const data = JSON.parse(res);
