@@ -10,7 +10,7 @@
 
 <div class="container">
     <h2>Catálogo de Productos</h2>
-
+<div class="table-styled">
     <table>
         <thead>
             <tr>
@@ -25,7 +25,7 @@
             <!-- Productos aquí -->
         </tbody>
     </table>
-
+</div>
     <h2>Editar Producto</h2>
     <input type="hidden" id="edit-id">
     <label>Nombre:</label>
@@ -83,7 +83,7 @@
         const descripcion = $('#edit-descripcion').val();
 
         if (!id || !nombre) {
-            $('#edit-msg').removeClass().addClass('error').text('ID y nombre son obligatorios.');
+            $('#edit-msg').removeClass().addClass('error').text('Rellene los campos.');
             return;
         }
 
