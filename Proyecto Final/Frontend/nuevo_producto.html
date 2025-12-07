@@ -4,63 +4,8 @@
     <meta charset="UTF-8">
     <title>Agregar Producto</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <link rel="stylesheet" href="css/styles.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f6f6f6;
-            padding: 30px;
-        }
-
-        .form-container {
-            max-width: 500px;
-            margin: auto;
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 8px rgba(0,0,0,0.1);
-        }
-
-        .form-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        input, textarea, button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        button {
-            background-color: #28a745;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            border: none;
-        }
-
-        button:hover {
-            background-color: #218838;
-        }
-
-        .msg {
-            text-align: center;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        .success {
-            color: green;
-        }
-
-        .error {
-            color: red;
-        }
-    </style>
+    <link rel="stylesheet" href="css/nuevo_producto.css">
+   
 </head>
 <body>
 
@@ -82,7 +27,7 @@
         };
 
         $.ajax({
-            url: 'http://localhost/product_app/backend/myapi/index.php?method=add_product',
+            url: 'http://localhost:8080/tecweb/Proyecto%20Final/Backend/Api/index.php?method=add_product',
             method: 'POST',
             data: JSON.stringify(data),
             contentType: 'application/json',

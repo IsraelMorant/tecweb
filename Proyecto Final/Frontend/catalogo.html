@@ -4,78 +4,7 @@
     <meta charset="UTF-8">
     <title>Catálogo de Productos (CRUD)</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 30px;
-            background-color: #f5f5f5;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: auto;
-            background: white;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 30px;
-        }
-
-        table, th, td {
-            border: 1px solid #ccc;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-
-        button {
-            padding: 6px 12px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .btn-danger {
-            background-color: red;
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-        }
-
-        .success {
-            color: green;
-            font-weight: bold;
-        }
-
-        .error {
-            color: red;
-            font-weight: bold;
-        }
-    </style>
+     <link rel="stylesheet" href="css/catologo.css"> 
 </head>
 <body>
 
@@ -113,7 +42,7 @@
 <script>
     function cargarCatalogo() {
         $.ajax({
-            url: 'http://localhost/product_app/backend/myapi/index.php?method=get_products',
+            url: 'http://localhost:8080/tecweb/Proyecto%20Final/Backend/Api/index.php?method=get_products',
             method: 'GET',
             success: function (response) {
                 const productos = JSON.parse(response);
@@ -159,7 +88,7 @@
         }
 
         $.ajax({
-            url: 'http://localhost/product_app/backend/myapi/index.php?method=update_product',
+            url: 'http://localhost:8080/tecweb/Proyecto%20Final/Backend/Api/index.php?method=update_product',
             method: 'POST',
             data: JSON.stringify({
                 id: id,
@@ -175,6 +104,11 @@
                 if (r.status === 'success') {
                     msg.removeClass().addClass('success').text(r.message);
                     cargarCatalogo(); // Recargar tabla
+                    //Limpiando inputs
+                    $('#edit-id').val(" ");
+                    $('#edit-nombre').val(" ");
+                    $('#edit-precio').val("");
+                    $('#edit-descripcion').val("");
                 } else {
                     msg.removeClass().addClass('error').text(r.message);
                 }
@@ -185,7 +119,7 @@
     function eliminarProducto(id) {
         if (confirm('¿Estás seguro de eliminar este producto?')) {
             $.ajax({
-                url: 'http://localhost/product_app/backend/myapi/index.php?method=delete_product',
+                url: 'http://localhost:8080/tecweb/Proyecto%20Final/Backend/Api/index.php?method=delete_product',
                 method: 'POST',
                 data: JSON.stringify({ id: id }),
                 contentType: 'application/json',
