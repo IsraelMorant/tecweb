@@ -6,13 +6,15 @@ require_once __DIR__ . '/DataBase.php';
 
 class Dashboard extends DataBase {
     public function getStats() {
-        $productos = $this->conexion->query("SELECT COUNT(*) AS total FROM productos WHERE eliminado = 0");
-        $usuarios = $this->conexion->query("SELECT COUNT(*) AS total FROM usuarios");
+      $data = [];
+        $sql = "SELECT * FROM productos WHERE eliminado = 0";
+        $result = $this->conexion->query($sql);
 
-        $data = [
-            "productos" => $productos->fetch_assoc()['total'] ?? 0,
-            "usuarios" => $usuarios->fetch_assoc()['total'] ?? 0
-        ];
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+        }
 
         return json_encode($data);
     }

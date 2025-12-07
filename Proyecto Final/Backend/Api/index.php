@@ -37,7 +37,7 @@ switch ($method) {
 
     case 'productos_por_rango':
         $api = new Dashboard('localhost', 'root', '', 'mi_base');
-        echo $api->productosPorRango();
+        echo $api->getStats();
         break;
         
     case 'update_product':
