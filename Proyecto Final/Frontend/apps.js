@@ -5,7 +5,7 @@ $('#loginBtn').on('click', function () {
     };
 
     $.ajax({
-        url: 'http://localhost:8080/tecweb/Proyecto%20Final/Backend/Api/index.php?method=login',//Moidifcando el url para cada computadora donde se ejecute, y ajustando correctamente las referencias
+        url: '../Backend/Api/index.php?method=login',//Moidifcando el url para cada computadora donde se ejecute, y ajustando correctamente las referencias
         method: 'POST',
         data: JSON.stringify(data),
         contentType: 'application/json',

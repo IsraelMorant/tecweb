@@ -36,7 +36,7 @@
 <script>
     $(document).ready(function () {
         $.ajax({
-            url: 'http://localhost:8080/tecweb/Proyecto%20Final/Backend/Api/index.php?method=dashboardP', //Moidifcando el url para cada computadora donde se ejecute, y ajustando correctamente las referencias
+            url: '../Backend/Api/index.php?method=dashboardP', //Moidifcando el url para cada computadora donde se ejecute, y ajustando correctamente las referencias
             method: 'GET',
             success: function (res) {
                 const data = JSON.parse(res);

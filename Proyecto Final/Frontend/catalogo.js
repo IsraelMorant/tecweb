@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $.ajax({
-        url: 'http://localhost/product_app/backend/myapi/index.php?method=get_products',
+        url: '../Backend/Api/index.php?method=get_products',
         method: 'GET',
         success: function (response) {
             const productos = JSON.parse(response);

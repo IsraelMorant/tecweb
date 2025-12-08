@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $.ajax({
-        url: 'http://localhost:8080/tecweb/Proyecto%20Final/Backend/Api/index.php?method=productos_por_rango',
+        url: '../Backend/Api/index.php?method=productos_por_rango',
         method: 'GET',
         success: function (response) {
             const data = JSON.parse(response);
